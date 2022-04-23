@@ -1,6 +1,11 @@
+import { GlobalStyle } from '~/styles/_global'
 
 export function App() {
   return (
-    <h1 className="h1">Hello, there!</h1>
+    <div id="app">
+      <GlobalStyle />
+
+      <h1>Hello, there!</h1>
+    </div>
   )
 }
