@@ -1,0 +1,18 @@
+{
+  "root": true,
+  "env": {
+    "browser": true
+  },
+  "extends": [
+    "lacussoft",
+    "lacussoft/react",
+    "lacussoft/typescript"
+  ],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "no-console": ["warn", { "allow": ["info", "warn", "error"] }],
+    "no-magic-numbers": "off",
+    "react/display-name": "off"
+  }
+}
