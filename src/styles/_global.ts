@@ -10,6 +10,7 @@ export const GlobalStyle = createGlobalStyle`
     --font-title: #363f5f;
     --font-body: #969cb3;
     --background: #f0f2f5;
+    --white: #ffffff;
   }
 
   * {
