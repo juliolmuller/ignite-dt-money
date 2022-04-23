@@ -1,4 +1,5 @@
 import { Container, Logo, NewTransactionButton, Root } from '~/styles/Header'
+
 export function Header() {
   return (
     <Root>

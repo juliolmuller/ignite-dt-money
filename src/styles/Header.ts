@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { Container as BaseContainer } from './Container'
+
 export const Root = styled.header`
   height: 13rem;
   width: 100%;
@@ -7,15 +9,10 @@ export const Root = styled.header`
   padding: 2rem;
 `
 
-export const Container = styled.div`
+export const Container = styled(BaseContainer)`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  width: 100%;
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 1rem;
 `
 
 export const Logo = styled.img`
