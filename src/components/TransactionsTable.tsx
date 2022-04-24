@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react'
+
+import { transactionService } from '~/services'
 import {
   Root,
   Table,
@@ -6,32 +9,15 @@ import {
   TableHeader,
   TableRow,
 } from '~/styles/TransactionsTable'
+import { Transaction } from '~/types'
 import { currency } from '~/utils'
 
 export function TransactionsTable() {
-  const transactions = [
-    {
-      id: 1,
-      title: 'Salário abr/2022',
-      category: 'Remuneração',
-      date: '07/04/2022',
-      amount: 5400,
-    },
-    {
-      id: 2,
-      title: 'Almoço',
-      category: 'Alimentação',
-      date: '07/04/2022',
-      amount: -38,
-    },
-    {
-      id: 3,
-      title: 'Eletricidade 04/2022',
-      category: 'Contas fixas',
-      date: '10/04/2022',
-      amount: -280,
-    },
-  ]
+  const [transactions, setTransactions] = useState<Transaction[]>([])
+
+  useEffect(() => {
+    transactionService.get().then(setTransactions)
+  }, [])
 
   return (
     <Root>

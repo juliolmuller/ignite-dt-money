@@ -20,7 +20,6 @@ export const TableBody = styled.tbody`
     background-color: var(--white);
 
     & > td:first-child {
-      width: 48%;
       color: var(--font-title);
     }
 
@@ -30,7 +29,11 @@ export const TableBody = styled.tbody`
   }
 `
 
-export const TableRow = styled.tr``
+export const TableRow = styled.tr`
+  & > td:first-child {
+    width: 48%;
+  }
+`
 
 export const TableCell = styled.td<{ color?: 'green' | 'red' }>`
   border-radius: 4px;
