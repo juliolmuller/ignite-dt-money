@@ -1,4 +1,5 @@
 import { Amount, Icon, Label, Root } from '~/styles/SummaryCard'
+import { currency } from '~/utils'
 
 export interface SummaryCardProps {
   amount: number
@@ -13,16 +14,11 @@ export function SummaryCard({
   icon,
   label,
 }: SummaryCardProps) {
-  const formattedAmount = new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  }).format(Math.abs(amount))
-
   return (
     <Root highlight={highlight}>
       <Icon src={`/img/${icon}.svg`} alt="summary icon" />
       <Label>{label}</Label>
-      <Amount>{formattedAmount}</Amount>
+      <Amount>{currency(amount)}</Amount>
     </Root>
   )
 }
