@@ -62,7 +62,7 @@ export function Modal({ children, isOpen, width = 580, onClose }: ModalProps) {
           />
         </CloseButton>
 
-        {children}
+        {isVisible && children}
       </Dialog>
     </Backdrop>
   )
