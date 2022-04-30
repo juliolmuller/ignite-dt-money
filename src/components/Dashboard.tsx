@@ -1,15 +1,12 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 
 import { SummaryCard } from '~/components/SummaryCard'
 import { TransactionsTable } from '~/components/TransactionsTable'
+import { useTransactions } from '~/contexts'
 import { Container, Content, Root, Summary } from '~/styles/Dashboard'
-import { Transaction } from '~/types'
 
-export interface DashboardProps {
-  transactions: Transaction[]
-}
-
-export function Dashboard({ transactions }: DashboardProps) {
+export function Dashboard() {
+  const { transactions, fetchTransactions } = useTransactions()
   const totalIncome = useMemo(() => {
     return transactions.reduce((total, transaction) => {
       return total + (transaction.type === 'income' ? transaction.amount : 0)
@@ -20,6 +17,10 @@ export function Dashboard({ transactions }: DashboardProps) {
       return total + (transaction.type === 'expense' ? transaction.amount : 0)
     }, 0)
   }, [transactions])
+
+  useEffect(() => {
+    fetchTransactions()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Root>
@@ -36,7 +37,7 @@ export function Dashboard({ transactions }: DashboardProps) {
         </Summary>
 
         <Content>
-          <TransactionsTable transactions={transactions} />
+          <TransactionsTable />
         </Content>
       </Container>
     </Root>

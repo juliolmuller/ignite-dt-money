@@ -1,3 +1,4 @@
+import { useTransactions } from '~/contexts'
 import {
   Root,
   Table,
@@ -6,14 +7,11 @@ import {
   TableHeader,
   TableRow,
 } from '~/styles/TransactionsTable'
-import { Transaction } from '~/types'
 import { currency, friendlyDate } from '~/utils'
 
-export interface TransactionsTableProps {
-  transactions: Transaction[]
-}
+export function TransactionsTable() {
+  const { transactions } = useTransactions()
 
-export function TransactionsTable({ transactions }: TransactionsTableProps) {
   return (
     <Root>
       <Table>
