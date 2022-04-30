@@ -12,24 +12,23 @@ import { Transaction } from '~/types'
 
 export interface TransactionFormProps {
   transaction?: Partial<Transaction>
-  onSubmit: (transaction: Omit<Transaction, 'id'>) => void
+  onSubmit: (transaction: Omit<Transaction, 'id' | 'date'>) => void
 }
 
 export function TransactionForm({ transaction, onSubmit }: TransactionFormProps) {
   const [title, setTitle] = useState(transaction?.title ?? '')
   const [category, setCategory] = useState(transaction?.category ?? '')
   const [amount, setAmount] = useState(transaction?.amount)
-  const [type, setType] = useState(amount && (amount > 0 ? 'income' : 'expense'))
+  const [type, setType] = useState<Transaction['type'] | undefined>(transaction?.type)
   const isValid = title && category && amount && type
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault()
     onSubmit({
-      // eslint-disable-next-line no-nested-ternary
-      amount: amount ? (type === 'income' ? amount : -amount) : 0,
-      category,
       title,
-      date: new Date().toISOString(),
+      category,
+      amount: amount ?? 0,
+      type: type ?? 'expense',
     })
   }
 
@@ -48,7 +47,7 @@ export function TransactionForm({ transaction, onSubmit }: TransactionFormProps)
         min={0}
         placeholder="Valor"
         type="number"
-        value={amount}
+        value={amount ?? ''}
         onChange={(event) => setAmount(Number(event.target.value))}
       />
       <SignContainer>

@@ -1,6 +1,3 @@
-import { useEffect, useState } from 'react'
-
-import { transactionService } from '~/services'
 import {
   Root,
   Table,
@@ -10,15 +7,13 @@ import {
   TableRow,
 } from '~/styles/TransactionsTable'
 import { Transaction } from '~/types'
-import { currency } from '~/utils'
+import { currency, friendlyDate } from '~/utils'
 
-export function TransactionsTable() {
-  const [transactions, setTransactions] = useState<Transaction[]>([])
+export interface TransactionsTableProps {
+  transactions: Transaction[]
+}
 
-  useEffect(() => {
-    transactionService.get().then(setTransactions)
-  }, [])
-
+export function TransactionsTable({ transactions }: TransactionsTableProps) {
   return (
     <Root>
       <Table>
@@ -35,8 +30,8 @@ export function TransactionsTable() {
             <TableRow key={transaction.id}>
               <TableCell>{transaction.title}</TableCell>
               <TableCell>{transaction.category}</TableCell>
-              <TableCell>{transaction.date}</TableCell>
-              <TableCell color={transaction.amount > 0 ? 'green' : 'red'}>
+              <TableCell>{friendlyDate(new Date(transaction.date))}</TableCell>
+              <TableCell color={transaction.type === 'income' ? 'green' : 'red'}>
                 {currency(transaction.amount)}
               </TableCell>
             </TableRow>
